@@ -1,5 +1,6 @@
 ﻿using Spectre.Console;
 
+
 var menuChoices = new string[3] { "View Books", "Add Book", "Delete Book" };
 
 var books = new List<string>()
@@ -7,18 +8,18 @@ var books = new List<string>()
     "The Great Gatsby", "To Kill a Mockingbird", "1984", "Pride and Prejudice", "The Catcher in the Rye", "The Hobbit", "Moby-Dick", "War and Peace", "The Odyssey", "The Lord of the Rings", "Jane Eyre", "Animal Farm", "Brave New World", "The Chronicles of Narnia", "The Diary of a Young Girl", "The Alchemist", "Wuthering Heights", "Fahrenheit 451", "Catch-22", "The Hitchhiker's Guide to the Galaxy"
 };
 
+
 while (true)
 {
-    Console.Clear();
-
     var choice = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
+            new SelectionPrompt<MenuOption>()
             .Title("What do you want to do next?")
-            .AddChoices(menuChoices));
+            .AddChoices(Enum.GetValues<MenuOption>()));
+
 
     switch (choice)
     {
-        case "View Books":
+        case MenuOption.ViewBooks:
                     /* Spectre's MarkupLine method is useful for styling strings.
             We'll use it as a standard do print messages to the console.*/
             AnsiConsole.MarkupLine("[yellow]List of Books:[/]");
@@ -34,7 +35,7 @@ while (true)
             AnsiConsole.MarkupLine("Press Any Key to Continue.");
             Console.ReadKey();
             break;
-        case "Add Book":
+        case MenuOption.AddBook:
 
             /* Spectre's Ask<> method allows us to prompt a message to grab
             the user's input. We can pass the type we expect as an answer
@@ -56,7 +57,7 @@ while (true)
             AnsiConsole.MarkupLine("Press Any Key to Continue.");
             Console.ReadKey();
             break;
-        case "Delete Book":
+        case MenuOption.DeleteBook:
                 // checking if there are any books to delete and letting the user know
             if (books.Count == 0)
             {
@@ -87,4 +88,12 @@ while (true)
             Console.ReadKey();
             break;
     }
+}
+
+
+enum MenuOption
+{
+    ViewBooks,
+    AddBook,
+    DeleteBook
 }
