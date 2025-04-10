@@ -20,24 +20,34 @@ while (true)
     switch (choice)
     {
         case MenuOption.ViewBooks:
-                    /* Spectre's MarkupLine method is useful for styling strings.
-            We'll use it as a standard do print messages to the console.*/
-            AnsiConsole.MarkupLine("[yellow]List of Books:[/]");
-
-            // Printing each book to the console with a loop
-            foreach (var book in books)
-            {
-                AnsiConsole.MarkupLine($"- [cyan]{book}[/]");
-            }
-
-            /* Having the user press a key before continuing, or the menu
-            wouldn't be visualisable */
-            AnsiConsole.MarkupLine("Press Any Key to Continue.");
-            Console.ReadKey();
+            ViewBooks();
             break;
         case MenuOption.AddBook:
+            AddBook();
+            break;
+        case MenuOption.DeleteBook:
+            DeleteBook();
+            break;
+    }
+}
 
-            /* Spectre's Ask<> method allows us to prompt a message to grab
+void ViewBooks()
+{
+    AnsiConsole.MarkupLine("[yellow]List of Books:[/]");
+
+    foreach (var book in books)
+    {
+        AnsiConsole.MarkupLine($"- [cyan]{book}[/]");
+    }
+
+    AnsiConsole.MarkupLine("Press Any Key to Continue.");
+    Console.ReadKey();
+}
+
+
+void AddBook()
+{
+/* Spectre's Ask<> method allows us to prompt a message to grab
             the user's input. We can pass the type we expect as an answer
             for validation. We're storing the answer in the 'title' variable*/
             var title = AnsiConsole.Ask<string>("Enter the [green]title[/] of the book to add:");
@@ -56,9 +66,12 @@ while (true)
 
             AnsiConsole.MarkupLine("Press Any Key to Continue.");
             Console.ReadKey();
-            break;
-        case MenuOption.DeleteBook:
-                // checking if there are any books to delete and letting the user know
+}
+
+
+void DeleteBook()
+{
+        // checking if there are any books to delete and letting the user know
             if (books.Count == 0)
             {
                 AnsiConsole.MarkupLine("[red]No books available to delete.[/]");
@@ -86,8 +99,6 @@ while (true)
 
             AnsiConsole.MarkupLine("Press Any Key to Continue.");
             Console.ReadKey();
-            break;
-    }
 }
 
 
