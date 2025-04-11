@@ -11,5 +11,5 @@ using Spectre.Console;
 
 //Console.WriteLine($"Title: {book1.Title}, Pages: {book1.Pages}");
 
-var book1 = new Book("Hamlet", 200);
-var book2 = new Book("Great Gatsby", 300);
+UserInterface userInterface = new();
+userInterface.MainMenu();
