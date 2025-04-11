@@ -6,14 +6,14 @@ using Spectre.Console;
 
 namespace LibraryManagementSystem
 {
-    internal class BooksController
+    internal class BooksController : IBaseController
 {
     private List<string> books = new()
     {
     "The Great Gatsby", "To Kill a Mockingbird", "1984", "Pride and Prejudice", "The Catcher in the Rye", "The Hobbit", "Moby-Dick", "War and Peace", "The Odyssey", "The Lord of the Rings", "Jane Eyre", "Animal Farm", "Brave New World", "The Chronicles of Narnia", "The Diary of a Young Girl", "The Alchemist", "Wuthering Heights", "Fahrenheit 451", "Catch-22", "The Hitchhiker's Guide to the Galaxy"
     };
 
-    internal void ViewBooks()
+    public void ViewItems()
     {
         var table = new Table();
         table.Border(TableBorder.Rounded);
@@ -45,7 +45,7 @@ namespace LibraryManagementSystem
         Console.ReadKey();
     }
 
-    public void AddBook()
+    public void AddItem()
     {
         var title = AnsiConsole.Ask<string>("Enter the [green]title[/] of the book to add:");
         var author = AnsiConsole.Ask<string>("Enter the [green]author[/] of the book:");
@@ -67,7 +67,7 @@ namespace LibraryManagementSystem
         AnsiConsole.MarkupLine("Press Any Key to Continue.");
         Console.ReadKey();
     }
-    internal void DeleteBook()
+    public void DeleteItem()
     {
         var books = MockDatabase.LibraryItems.OfType<Book>().ToList();
 
@@ -98,5 +98,5 @@ namespace LibraryManagementSystem
         Console.ReadKey();
     }
 
-}
+    }
 }
